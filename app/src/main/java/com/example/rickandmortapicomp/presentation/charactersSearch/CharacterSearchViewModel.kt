@@ -3,8 +3,7 @@ package com.example.rickandmortapicomp.presentation.charactersSearch
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
-import com.example.rickandmortapicomp.use_case.GetCharactersUseCase
+import com.example.rickandmortapicomp.domain.use_case.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.rickandmortapicomp.presentation.characterList.CharacterListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi

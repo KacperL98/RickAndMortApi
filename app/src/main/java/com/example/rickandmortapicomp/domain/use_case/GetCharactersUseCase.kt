@@ -1,4 +1,4 @@
-package com.example.rickandmortapicomp.use_case
+package com.example.rickandmortapicomp.domain.use_case
 
 import androidx.paging.PagingData
 import com.example.rickandmortapicomp.data.remote.models.characters.Character

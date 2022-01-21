@@ -3,7 +3,7 @@ package com.example.rickandmortapicomp.di
 import com.example.rickandmortapicomp.data.remote.ApiService
 import com.example.rickandmortapicomp.data.repository.CharactersListRepositoryImpl
 import com.example.rickandmortapicomp.domain.repository.CharactersRepository
-import com.example.rickandmortapicomp.use_case.GetCharactersUseCase
+import com.example.rickandmortapicomp.domain.use_case.GetCharactersUseCase
 import com.example.rickandmortapicomp.util.Constants.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
