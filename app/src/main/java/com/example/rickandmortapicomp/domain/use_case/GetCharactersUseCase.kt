@@ -8,9 +8,8 @@ import javax.inject.Inject
 
 class GetCharactersUseCase @Inject constructor(
     private val characterRepository: CharactersRepository,
-    private val name: String? = null,
 ) {
-    suspend operator fun invoke(): Flow<PagingData<Character>> {
-        return characterRepository.getAllCharacters(name)
+    suspend operator fun invoke(searchName: String? = null): Flow<PagingData<Character>> {
+        return characterRepository.getAllCharacters(searchName)
     }
 }

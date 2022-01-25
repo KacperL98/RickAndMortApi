@@ -30,7 +30,6 @@ fun CharactersList(searchScreen: () -> Unit) {
                 }
             })
 
-
         }
     ) {
 

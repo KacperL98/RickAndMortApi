@@ -3,6 +3,7 @@ package com.example.rickandmortapicomp.presentation.charactersSearch
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.example.rickandmortapicomp.domain.use_case.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.rickandmortapicomp.presentation.characterList.CharacterListState
@@ -23,8 +24,22 @@ class CharacterSearchViewModel @Inject constructor(
     private val _searchString = MutableStateFlow("")
     val searchString = _searchString.asStateFlow()
 
+    @ExperimentalCoroutinesApi
+    private val searchResponse = searchString.flatMapLatest { searchName ->
+        characterListUseCase.invoke(searchName).cachedIn(viewModelScope)
+    }.shareIn(viewModelScope, SharingStarted.WhileSubscribed(), replay = 1)
+
     init {
         viewModelScope.launch {
+
+             _searchResult.value = CharacterListState(isLoading = true)
+            searchResponse.onEach { results ->
+                 _searchResult.value = CharacterListState(
+                     dataList = flow {
+                         emit(results)
+                     }
+                 )
+             }
         }
     }
 
@@ -38,10 +53,11 @@ class CharacterSearchViewModel @Inject constructor(
                 dataList = null
             )
             delay(1000)
-            val response = characterListUseCase.invoke()
+            val response = characterListUseCase.invoke(searchString)
             _searchResult.value = CharacterListState(
                 dataList = response
             )
         }
     }
 }
+
